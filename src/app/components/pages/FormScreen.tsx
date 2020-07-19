@@ -6,19 +6,38 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  buttonArea: {
+    margin: 20,
+  },
 });
 
 const FormScreen: React.SFC<{}> = ({}) => {
   const navigation = useNavigation();
 
-  const back = useCallback(() => {
+  const goBack = useCallback(() => {
     navigation.goBack();
+  }, [navigation]);
+
+  const openOtherFormScreen = useCallback(() => {
+    navigation.push('Form');
+  }, [navigation]);
+
+  const goBackHome = useCallback(() => {
+    navigation.popToTop();
   }, [navigation]);
 
   return (
     <View style={styles.container}>
-      <Text>FormPage</Text>
-      <Button title="back to Home screen" onPress={back} />
+      <Text>Form</Text>
+      <View style={styles.buttonArea}>
+        <Button title="go back" onPress={goBack} />
+      </View>
+      <View style={styles.buttonArea}>
+        <Button title="open other form screen" onPress={openOtherFormScreen} />
+      </View>
+      <View style={styles.buttonArea}>
+        <Button title="back to home screen" onPress={goBackHome} />
+      </View>
     </View>
   );
 };

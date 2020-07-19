@@ -17,7 +17,7 @@ const FormScreen: React.FC<{}> = () => {
 
   return (
     <View style={styles.container}>
-      <Text>FormPage</Text>
+      <Text>Home</Text>
       <Button title="Go to form screen" onPress={toForm} />
     </View>
   );
