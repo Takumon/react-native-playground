@@ -11,14 +11,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const FormScreen: React.SFC<{}> = ({}) => {
+const DetailScreen: React.SFC<{}> = ({}) => {
   const navigation = useNavigation();
 
   const goBack = useCallback(() => {
     navigation.goBack();
   }, [navigation]);
 
-  const openOtherFormScreen = useCallback(() => {
+  const openOtherDetailScreen = useCallback(() => {
     navigation.push('Form');
   }, [navigation]);
 
@@ -33,7 +33,7 @@ const FormScreen: React.SFC<{}> = ({}) => {
         <Button title="go back" onPress={goBack} />
       </View>
       <View style={styles.buttonArea}>
-        <Button title="open other form screen" onPress={openOtherFormScreen} />
+        <Button title="open other form screen" onPress={openOtherDetailScreen} />
       </View>
       <View style={styles.buttonArea}>
         <Button title="back to home screen" onPress={goBackHome} />
@@ -42,4 +42,4 @@ const FormScreen: React.SFC<{}> = ({}) => {
   );
 };
 
-export default FormScreen;
+export default DetailScreen;

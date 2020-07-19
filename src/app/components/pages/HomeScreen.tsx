@@ -8,19 +8,19 @@ const styles = StyleSheet.create({
   },
 });
 
-const FormScreen: React.FC<{}> = () => {
+const HomeScreen: React.FC<{}> = () => {
   const navigation = useNavigation();
 
-  const toForm = useCallback(() => {
+  const toDetail = useCallback(() => {
     navigation.navigate('Form');
   }, [navigation]);
 
   return (
     <View style={styles.container}>
       <Text>Home</Text>
-      <Button title="Go to form screen" onPress={toForm} />
+      <Button title="Go to form detail" onPress={toDetail} />
     </View>
   );
 };
 
-export default FormScreen;
+export default HomeScreen;
