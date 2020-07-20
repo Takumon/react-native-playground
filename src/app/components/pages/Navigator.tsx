@@ -1,16 +1,16 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
-import DetailScreen from './DetailScreen';
-import HomeScreen from './HomeScreen';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import HomeScreen from './Home';
+import Function1Screen from './Function1';
 
-const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const Navigator: React.SFC<{}> = () => {
   return (
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Form" component={DetailScreen} />
-    </Stack.Navigator>
+    <Tab.Navigator initialRouteName="Home">
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Function1" component={Function1Screen} />
+    </Tab.Navigator>
   );
 };
 
