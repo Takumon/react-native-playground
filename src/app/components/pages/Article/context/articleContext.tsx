@@ -1,10 +1,56 @@
-import React, {useState, createContext, useContext, useCallback} from 'react';
-import type {ArticlesType, ArticleType, DraftArticleType, ArticleContextType} from '../types';
+import React, {useReducer, createContext, useContext} from 'react';
+
+// article
+export type ArticleType = {
+  id: number;
+  title: string;
+  body: string;
+};
+
+export type ArticlesType = ArticleType[];
+
+export type DraftArticleType = {
+  title: string;
+  body: string;
+};
+
+// article reducer
+export enum ActionTypeType {
+  'ADD_ARTICLE',
+}
+
+export type ActionType = {
+  type: ActionTypeType;
+  payload: DraftArticleType;
+};
+
+type ArticleReducerType = (state: ArticlesType, action: ActionType) => ArticlesType;
+
+// article context
+export type ArticleContextType = {
+  state: ArticlesType;
+  dispatch: React.Dispatch<ActionType>;
+};
+
+const reducer: ArticleReducerType = (state, action) => {
+  switch (action.type) {
+    case ActionTypeType.ADD_ARTICLE:
+      return [
+        ...state,
+        {
+          id: Math.random(),
+          ...action.payload,
+        },
+      ];
+    default:
+      throw new Error(`Invalid action.type = ${action.type}`);
+  }
+};
 
 const ArticleContext = createContext<ArticleContextType>({
-  articles: [],
-  saveArticle: (articles: DraftArticleType) => {
-    console.log('default saveArticle', articles);
+  state: [],
+  dispatch: (action) => {
+    console.log('call dispatch', action);
   },
 });
 export const useArticleContext: () => ArticleContextType = () => useContext(ArticleContext);
@@ -15,18 +61,9 @@ const initialArticles: ArticlesType = [
 ];
 
 const ArticleProvider: React.SFC<{}> = ({children}) => {
-  const [articles, setArticles] = useState(initialArticles);
+  const [state, dispatch] = useReducer(reducer, initialArticles);
 
-  const saveArticle = useCallback((article: DraftArticleType) => {
-    const newArticle: ArticleType = {
-      id: Math.random(),
-      ...article,
-    };
-
-    setArticles((currentArticles) => [...currentArticles, newArticle]);
-  }, []);
-
-  return <ArticleContext.Provider value={{articles, saveArticle}}>{children}</ArticleContext.Provider>;
+  return <ArticleContext.Provider value={{state, dispatch}}>{children}</ArticleContext.Provider>;
 };
 
 export default ArticleProvider;

@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import type {ArticleType} from '../../../Article/types';
+import type {ArticleType} from '../../context/articleContext';
 
 type Props = {
   article: ArticleType;

@@ -1,7 +1,7 @@
 import React, {useState, useCallback} from 'react';
 import {TextInput, Button, StyleSheet, View} from 'react-native';
-import type {DraftArticleType} from '../../types';
-import {useArticleContext} from '../../context/articleContext';
+import type {DraftArticleType} from '../../context/articleContext';
+import {useArticleContext, ActionTypeType} from '../../context/articleContext';
 
 const styles = StyleSheet.create({
   addArticle: {
@@ -27,7 +27,7 @@ const initialDraftArticle: DraftArticleType = {
 
 type Props = {};
 const AddArticle: React.SFC<Props> = () => {
-  const {saveArticle} = useArticleContext();
+  const {dispatch} = useArticleContext();
   const [article, setArticle] = useState<DraftArticleType>(initialDraftArticle);
 
   const setTitle = useCallback((value: string) => {
@@ -53,9 +53,12 @@ const AddArticle: React.SFC<Props> = () => {
       return;
     }
 
-    saveArticle(article);
+    dispatch({
+      type: ActionTypeType.ADD_ARTICLE,
+      payload: article,
+    });
     setArticle(initialDraftArticle);
-  }, [article, saveArticle]);
+  }, [article, dispatch]);
 
   return (
     <View style={styles.addArticle}>
