@@ -28,8 +28,9 @@ const SimpleAnimationScreen: React.FC<{}> = () => {
   return (
     <View style={styles.container}>
       <Text>SimpleAnimationScreen</Text>
-      <Button title="Animate Box" onPress={animate} />
-      <Animated.View style={[styles.box, {translateY}]} />
+      <Animated.View style={[styles.box, {translateY}]}>
+        <Button title="Animate Box" onPress={animate} />
+      </Animated.View>
     </View>
   );
 };
