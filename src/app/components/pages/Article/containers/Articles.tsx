@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Article from '../components/Article/Article';
-import {useArticleContext} from '../context/articleContext';
+import { useArticleContext } from '../context/articleContext';
 
 const styles = StyleSheet.create({
   container: {
@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 });
 
 const Articles: React.SFC<{}> = () => {
-  const {articles} = useArticleContext();
+  const { state: articles } = useArticleContext();
 
   return (
     <View style={styles.container}>
